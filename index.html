@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="style.css">
+	<title>formulario</title>
+</head>
+<body onload="getcookiedata()">
+	<form action="mail.php" method="POST">
+		<p id="title">Login</p>
+		<p>Email:<br> <input type="email" id="email" name="email" placeholder="Enter Email" required></p>
+		<p>Password:<br> <input type="password" id="password" name="password" placeholder="Enter password" required></p><br>
+		<p><input onclick="setCookie()" type="checkbox" name="check" id="remenber" required>Remenber Me</p>
+		<p><input type="submit" value="SignIn"></p>
+		<p> <a href="#">forgot password?</a></p>
+		<p> <a href="#">create new account</p></a>
+		<p>
+			<span class="fa fa-facebook socialicon"></span>	
+			<span class="fa fa-twitter socialicon"></span>	
+			<span class="fa fa-instagram socialicon"></span>	
+			<span class="fa fa-whatsapp socialicon"></span>	
+			<span class="fa fa-youtube-play socialicon"></span>	
+			
+		</p>
+	</form>
+
+		<script type="text/javascript">
+		const setCookie=()=>{
+			let email = document.getElementById('email').value;
+			let password = document.getElementById('password').value;
+			document.cookie = `myusername = ${email} ;path = http://localhost/Tecnologias%20Emergentes/`;
+			document.cookie = `mypassword = ${password} ;path = http://localhost/Tecnologias%20Emergentes/`;
+		}
+		const obtenerCookie = cookieName =>{
+			let cookies = document.cookie;
+			cookies = cookies.split(";");
+			for(let i = 0 ; i < cookies.length; i++){
+				let cookie = cookies[i].trim();
+				if(cookie.startsWith(cookieName)){
+					cookie = cookie.split("=");
+					return cookie[1];
+				}	
+			}
+			if(!cookie.startsWith(cookieName)){
+				return "No hay cokies con ese nombre";
+			}
+		}
+		const getcookiedata=()=>{
+			// console.log(document.cookie); Muestra todos los cookies creados
+			let email = obtenerCookie('myusername');
+			let password = obtenerCookie('mypassword');
+			document.getElementById('email').value = email;
+			document.getElementById('password').value = password;
+		}
+	</script>
+	</body>
+	</html>
